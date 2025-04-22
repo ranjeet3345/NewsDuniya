@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Aggregator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f8;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .source-column {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .source-column h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #0056b3;
+        }
+
+        .article {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .article:last-child {
+            border-bottom: none;
+        }
+
+        .article-title {
+            font-size: 1.1em;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .article-title a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .article-title a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        @media (max-width: 900px) {
+            .news-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Latest News from The Hindu, TOI, and Indian Express</h1>
+
+    <div class="news-container">
+        <div class="source-column">
+            <h2>The Hindu</h2>
+            {% for article in articles %}
+                {% if article.source == "The Hindu" %}
+                    <div class="article">
+                        <div class="article-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></div>
+                        <div class="article-content">{{ article.content|truncatechars:300 }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="source-column">
+            <h2>Times of India</h2>
+            {% for article in articles %}
+                {% if article.source == "Times of India" %}
+                    <div class="article">
+                        <div class="article-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></div>
+                        <div class="article-content">{{ article.content|truncatechars:300 }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="source-column">
+            <h2>Indian Express</h2>
+            {% for article in articles %}
+                {% if article.source == "Indian Express" %}
+                    <div class="article">
+                        <div class="article-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></div>
+                        <div class="article-content">{{ article.content|truncatechars:300 }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
